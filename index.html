@@ -1,31 +1,265 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lol</title>
+    <title>LOL - আলটিমেট লিংক হাব</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-        body { background: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-        .container { width: 100%; max-width: 450px; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); text-align: center; }
-        .links-wrapper { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .link-card { display: block; padding: 14px; background: #1e293b; color: #38bdf8; text-decoration: none; border-radius: 8px; font-weight: bold; border: 1px solid rgba(56, 189, 248, 0.2); transition: 0.2s; }
-        .link-card:hover { background: #38bdf8; color: #0f172a; transform: translateY(-2px); }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+        }
+
+        body { 
+            background: #090d16;
+            color: #f8fafc; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        /* ব্যাকগ্রাউন্ড ভিডিওর স্টাইল (ভিডিও আরও পরিষ্কার করার জন্য ফিল্টার যোগ করা হয়েছে) */
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(1.1) contrast(1.05); /* ভিডিওর ব্রাইটনেস ও কনট্রাস্ট সামান্য বাড়ানো হয়েছে */
+        }
+
+        /* ভিডিওর ওপর হালকা ফিল্টার (অপাসিটি ০.৮৫ থেকে কমিয়ে ০.৪ করা হয়েছে যাতে ভিডিও পরিষ্কার দেখা যায়) */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(9, 13, 22, 0.4) 0%, rgba(15, 23, 42, 0.5) 100%);
+            z-index: -1;
+        }
+
+        /* আল্ট্রা গ্লাস-মরফিজম কন্টেইনার (ভিডিওর ওপর টেক্সট স্পষ্ট রাখার জন্য ব্যাকগ্রাউন্ড ব্লাকনেস বাড়ানো হয়েছে) */
+        .container { 
+            width: 100%; 
+            max-width: 450px; 
+            background: rgba(15, 23, 42, 0.8); /* ব্যাকগ্রাউন্ড একটু ডার্ক করা হয়েছে যাতে ভিডিওর মধ্যেও লেখা বোঝা যায় */
+            backdrop-filter: blur(25px) saturate(200%);
+            -webkit-backdrop-filter: blur(25px) saturate(200%);
+            padding: 40px 25px; 
+            border-radius: 28px; 
+            border: 1px solid rgba(255, 255, 255, 0.12); 
+            text-align: center; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 
+                        0 0 40px rgba(56, 189, 248, 0.2);
+            animation: containerSpawn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+
+        /* প্রোফাইল লোগো নিয়ন এফেক্ট */
+        .logo-wrapper {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+        }
+
+        .profile-logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+            background: #1e293b;
+        }
+
+        /* এনিমেটেড নিয়ন রিং */
+        .logo-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #06b6d4, #6366f1, #d946ef);
+            background-size: 200% 200%;
+            animation: gradientRotate 4s linear infinite;
+            z-index: -1;
+        }
+
+        h1 { 
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: #94a3b8; 
+            font-size: 13px;
+            margin-top: 6px; 
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* সার্চ বার স্টাইল */
+        .search-box-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .search-input:focus {
+            border-color: #06b6d4;
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3), 
+                        inset 0 2px 4px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .search-input::placeholder {
+            color: #4b5563;
+        }
+
+        .links-wrapper { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 16px; 
+            max-height: 380px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        /* স্ক্রলবার কাস্টমাইজেশন */
+        .links-wrapper::-webkit-scrollbar {
+            width: 5px;
+        }
+        .links-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+
+        /* নিয়ন লিংক কার্ড */
+        .link-card { 
+            display: block; 
+            padding: 18px; 
+            background: rgba(255, 255, 255, 0.06); 
+            color: #e2e8f0; 
+            text-decoration: none; 
+            border-radius: 14px; 
+            font-weight: 600; 
+            font-size: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* হোভার এফেক্ট */
+        .link-card:hover { 
+            background: linear-gradient(90deg, rgba(6, 182, 212, 0.25) 0%, rgba(99, 102, 241, 0.25) 100%);
+            color: #00f2fe; 
+            transform: scale(1.02); 
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.3);
+        }
+
+        .no-results {
+            display: none;
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        @keyframes containerSpawn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes gradientRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- ভিডিও এলিমেন্ট -->
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="bg.mp4" type="video/mp4">
+    </video>
+    
+    <!-- ডার্ক ওভারলে ফিল্টার -->
+    <div class="video-overlay"></div>
+
     <div class="container">
+        <!-- লোগো এরিয়া -->
+        <div class="logo-wrapper">
+            <img src="logo.jpg" alt="Logo" class="profile-logo" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=LOL';">
+        </div>
+
         <h1>LOL</h1>
-        <p style="color: #94a3b8; margin-top: 5px;">সবগুলো লিংক নিচে দেওয়া হলো</p>
+        <p class="subtitle">Secure Link Dashboard</p>
         
-        <div class="links-wrapper">
+        <!-- লাইভ সার্চ বার -->
+        <div class="search-box-container">
+            <input type="text" id="searchBar" class="search-input" placeholder="লিংক খুঁজুন..." onkeyup="searchLinks()">
+        </div>
+
+        <div class="links-wrapper" id="linksContainer">
             <!-- START_LINKS -->
             <a href="https://www.theyarehuge.com/v/mom-swap-mellanie-monroe-and-ms-visual-the-underwear-thieves.big-boobs" target="_blank" class="link-card">porn</a>
             <a href="https://xhamster.com/videos/boob-suck-of-ex-girl-11479059" target="_blank" class="link-card">p</a>
             <!-- END_LINKS -->
         </div>
+        
+        <p id="notFound" class="no-results">কোনো লিংক পাওয়া যায়নি!</p>
     </div>
 
+    <!-- লাইভ সার্চের জাভাস্ক্রিপ্ট -->
+    <script>
+        function searchLinks() {
+            const input = document.getElementById('searchBar').value.toLowerCase();
+            const links = document.getElementsByClassName('link-card');
+            const notFound = document.getElementById('notFound');
+            let hasResults = false;
+
+            for (let i = 0; i < links.length; i++) {
+                const linkText = links[i].innerText.toLowerCase();
+                if (linkText.includes(input)) {
+                    links[i].style.display = "block";
+                    hasResults = true;
+                } else {
+                    links[i].style.display = "none";
+                }
+            }
+
+            if (hasResults) {
+                notFound.style.display = "none";
+            } else {
+                notFound.style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>
