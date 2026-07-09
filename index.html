@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@
             position: relative;
         }
 
-        /* ব্যাকগ্রাউন্ড ভিডিওর স্টাইল (ভিডিও আরও পরিষ্কার করার জন্য ফিল্টার যোগ করা হয়েছে) */
+        /* ব্যাকগ্রাউন্ড ভিডিও */
         .video-bg {
             position: fixed;
             top: 0;
@@ -32,33 +32,27 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
-            filter: brightness(1.1) contrast(1.05); /* ভিডিওর ব্রাইটনেস ও কনট্রাস্ট সামান্য বাড়ানো হয়েছে */
+            filter: brightness(1.1) contrast(1.05);
         }
 
-        /* ভিডিওর ওপর হালকা ফিল্টার (অপাসিটি ০.৮৫ থেকে কমিয়ে ০.৪ করা হয়েছে যাতে ভিডিও পরিষ্কার দেখা যায়) */
+        /* ভিডিওর ওপর খুব হালকা ফিল্টার */
         .video-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(9, 13, 22, 0.4) 0%, rgba(15, 23, 42, 0.5) 100%);
+            background: linear-gradient(135deg, rgba(9, 13, 22, 0.3) 0%, rgba(15, 23, 42, 0.4) 100%);
             z-index: -1;
         }
 
-        /* আল্ট্রা গ্লাস-মরফিজম কন্টেইনার (ভিডিওর ওপর টেক্সট স্পষ্ট রাখার জন্য ব্যাকগ্রাউন্ড ব্লাকনেস বাড়ানো হয়েছে) */
+        /* কার্ডের ব্যাকগ্রাউন্ড ও বর্ডার সম্পূর্ণ রিমুভড (স্বচ্ছ কন্টেইনার) */
         .container { 
             width: 100%; 
             max-width: 450px; 
-            background: rgba(15, 23, 42, 0.8); /* ব্যাকগ্রাউন্ড একটু ডার্ক করা হয়েছে যাতে ভিডিওর মধ্যেও লেখা বোঝা যায় */
-            backdrop-filter: blur(25px) saturate(200%);
-            -webkit-backdrop-filter: blur(25px) saturate(200%);
-            padding: 40px 25px; 
-            border-radius: 28px; 
-            border: 1px solid rgba(255, 255, 255, 0.12); 
+            background: transparent; 
+            padding: 20px 10px; 
             text-align: center; 
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 
-                        0 0 40px rgba(56, 189, 248, 0.2);
             animation: containerSpawn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 1;
         }
@@ -81,7 +75,6 @@
             background: #1e293b;
         }
 
-        /* এনিমেটেড নিয়ন রিং */
         .logo-wrapper::before {
             content: '';
             position: absolute;
@@ -101,18 +94,20 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0, 242, 254, 0.3);
         }
 
         .subtitle {
-            color: #94a3b8; 
+            color: #cbd5e1; 
             font-size: 13px;
             margin-top: 6px; 
             margin-bottom: 25px;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         }
 
-        /* সার্চ বার স্টাইল */
+        /* সার্চ বার ট্রান্সপারেন্ট স্টাইল */
         .search-box-container {
             position: relative;
             margin-bottom: 30px;
@@ -121,25 +116,25 @@
         .search-input {
             width: 100%;
             padding: 14px 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 14px;
             color: #fff;
             font-size: 15px;
             outline: none;
             transition: all 0.3s;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .search-input:focus {
             border-color: #06b6d4;
-            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3), 
-                        inset 0 2px 4px rgba(0, 0, 0, 0.5);
-            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+            background: rgba(0, 0, 0, 0.6);
         }
 
         .search-input::placeholder {
-            color: #4b5563;
+            color: #94a3b8;
         }
 
         .links-wrapper { 
@@ -151,41 +146,43 @@
             padding-right: 5px;
         }
 
-        /* স্ক্রলবার কাস্টমাইজেশন */
         .links-wrapper::-webkit-scrollbar {
             width: 5px;
         }
         .links-wrapper::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
         }
 
-        /* নিয়ন লিংক কার্ড */
+        /* ট্রান্সপারেন্ট নিয়ন লিংক ডিজাইন (যাতে ব্যাকগ্রাউন্ড পুরোপুরি দেখা যায়) */
         .link-card { 
             display: block; 
             padding: 18px; 
-            background: rgba(255, 255, 255, 0.06); 
-            color: #e2e8f0; 
+            background: rgba(15, 23, 42, 0.3); /* একদম হালকা স্বচ্ছ ব্যাকগ্রাউন্ড */
+            backdrop-filter: blur(8px); /* লেখার পেছনের অংশ সামান্য ব্লার যাতে টেক্সট পড়া যায় */
+            -webkit-backdrop-filter: blur(8px);
+            color: #f1f5f9; 
             text-decoration: none; 
             border-radius: 14px; 
             font-weight: 600; 
             font-size: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.08); 
+            border: 1px solid rgba(255, 255, 255, 0.15); 
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* হোভার এফেক্ট */
+        /* লিংক হোভার এফেক্ট */
         .link-card:hover { 
-            background: linear-gradient(90deg, rgba(6, 182, 212, 0.25) 0%, rgba(99, 102, 241, 0.25) 100%);
+            background: linear-gradient(90deg, rgba(6, 182, 212, 0.3) 0%, rgba(99, 102, 241, 0.3) 100%);
             color: #00f2fe; 
             transform: scale(1.02); 
-            border-color: rgba(6, 182, 212, 0.6);
-            box-shadow: 0 8px 25px rgba(6, 182, 212, 0.3);
+            border-color: #06b6d4;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
         }
 
         .no-results {
             display: none;
-            color: #64748b;
+            color: #94a3b8;
             font-size: 14px;
             margin-top: 10px;
         }
@@ -204,7 +201,7 @@
 </head>
 <body>
 
-    <!-- ভিডিও এলিমেন্ট -->
+    <!-- ব্যাকগ্রাউন্ড ভিডিও -->
     <video class="video-bg" autoplay muted loop playsinline>
         <source src="bg.mp4" type="video/mp4">
     </video>
